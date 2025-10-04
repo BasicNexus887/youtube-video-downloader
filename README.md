@@ -22,4 +22,4 @@ A simple app for downloading videos from YouTube.
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/youtube-downloader.git
+git clone [https://github.com/yourusername/youtube-downloader.git](https://github.com/yourusername/youtube-video-downloader)
