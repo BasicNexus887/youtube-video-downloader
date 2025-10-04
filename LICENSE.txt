@@ -1,0 +1,38 @@
+
+## 5. GitHub Actions для автоматической сборки
+
+Создайте `.github/workflows/build.yml`:
+```yaml
+name: Build YouTube Downloader
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+    
+    - name: Build with PyInstaller
+      run: |
+        pyinstaller --onefile --windowed --name YouTubeDownloader youtube_downloader.py
+    
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: YouTubeDownloader-Windows
+        path: dist/YouTubeDownloader.exe
